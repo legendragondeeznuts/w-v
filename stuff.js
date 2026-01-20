@@ -4,7 +4,10 @@ const app = express();
 
 app.use((req, res) => {
   const url = req.url.slice(1);
-  if (!url) return res.send("No URL provided");
+
+  if (!url) {
+    return res.send("No URL provided");
+  }
 
   request(
     {
@@ -18,4 +21,9 @@ app.use((req, res) => {
     .pipe(res);
 });
 
-app.listen(3000, () => console.log("Proxy running"));
+// IMPORTANT: Render requires this
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Proxy running on port ${PORT}`);
+});
