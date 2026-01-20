@@ -9,19 +9,17 @@ app.use((req, res) => {
     return res.send("No URL provided");
   }
 
-  request(
-    {
-      url: url,
-      headers: {
-        "User-Agent": "Mozilla/5.0"
-      }
+  request({
+    url: url,
+    headers: {
+      "User-Agent": "Mozilla/5.0"
     }
-  )
+  })
     .on("error", () => res.send("Error loading site"))
     .pipe(res);
 });
 
-// IMPORTANT: Render requires this
+// Render requires this
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
